@@ -1,4 +1,4 @@
-const SECRET_HASH = "";
+const SECRET_HASH = "72805ff7c0f210f3aa6e66f3f208974437611c64a2393f4e7edfef47d8e140a7";
 
 const pinInput = document.getElementById('pin-input');
 const submitBtn = document.getElementById('submit-btn');
