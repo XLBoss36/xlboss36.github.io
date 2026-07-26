@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Meine Website </title>
+	<meta charset="UTF-8">
+	<title> secret website</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1> HELLO WORLD! </h1>
+	<div id="login-screen" class="card">
+		<h2>Access denied</h2>
+		<p>Enter 3-digit code to gain access to the secret Website: </p>
+		<input type="password" id="pin-input" maxlength="3" placeholder="***">
+		<br>
+		<button id="submit-btn">enter</button>
+		<p id="error-msg" class="hidden">wrong Code!</p>
+	</div>
 
-<p> meine erste kleine website ig </p>
-<p> erste aenderung: leck eier (oder so) </p>
+	<div id="protected-content" class="card hidden">
+		<h1>Willkommen!!</h1>
+		<p>"Alles hat geklappt und du bist neben mir die erste Person, die diese geheime Nachricht sieht <3"</p>
+	</div>
+	
+	<script src="script.js"></script>
 </body>
 </html>
