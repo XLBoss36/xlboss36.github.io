@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangman Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #word-display {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+
+    #guess-input {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    #message {
+      margin-top: 10px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hangman Game</h1>
+
+  <div id="word-display"></div>
+  <input type="text" id="guess-input" placeholder="Enter a letter">
+  <button onclick="guessLetter()">Guess</button>
+  <p id="message"></p>
+
+  <script>
+    // Array of words for the game
+    const words = ["hangman", "javascript", "html", "css", "developer"];
+
+    // Select a random word from the array
+    let selectedWord = words[Math.floor(Math.random() * words.length)];
+
+    // Array to store correctly guessed letters
+    let correctGuesses = Array(selectedWord.length).fill("_");
+
+    // Variable to track remaining attempts
+    let remainingAttempts = 6;
+
+    // Display the initial state of the word
+    document.getElementById("word-display").innerText = correctGuesses.join(" ");
+
+    // Function to handle letter guessing
+    function guessLetter() {
+      const guessInput = document.getElementById("guess-input");
+      const guessedLetter = guessInput.value.toLowerCase();
+
+      if (guessedLetter.length !== 1 || !/[a-z]/.test(guessedLetter)) {
+        document.getElementById("message").innerText = "Please enter a valid single letter.";
+        return;
+      }
+
+      if (selectedWord.includes(guessedLetter)) {
+        // Update correct guesses and display
+        for (let i = 0; i < selectedWord.length; i++) {
+          if (selectedWord[i] === guessedLetter) {
+            correctGuesses[i] = guessedLetter;
+          }
+        }
+
+        document.getElementById("word-display").innerText = correctGuesses.join(" ");
+
+        // Check if the entire word has been guessed
+        if (!correctGuesses.includes("_")) {
+          document.getElementById("message").innerText = "Congratulations! You guessed the word!";
+        }
+      } else {
+        // Incorrect guess
+        remainingAttempts--;
+        document.getElementById("message").innerText = `Incorrect! ${remainingAttempts} attempts remaining.`;
+
+        // Check if no attempts left
+        if (remainingAttempts === 0) {
+          document.getElementById("message").innerText = `Sorry, you ran out of attempts. The word was "${selectedWord}".`;
+        }
+      }
+
+      // Clear input field
+      guessInput.value = "";
+    }
+  </script>
+</body>
+</html>
